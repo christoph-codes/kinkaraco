@@ -1,0 +1,76 @@
+{%- comment %}
+  Hey there! This snippet is managed by Locksmith (uselocksmith.com). You can
+  fiddle with what's below, but your changes will be reset the next time that
+  Locksmith interacts with your shop.
+
+  Last updated: Wed, 21 Apr 2021 00:59:57 +0000
+  Integration version: v1.0
+{% endcomment -%}
+
+{%assign _5="metafields"%}{%assign _3="locksmith"%}{%assign locksmith_active=false%}{%if shop[_5][_3].active%}{%if shop[_5][_3].active_as_lock%}{%if template != 'customers/account' and template != 'customers/activate_account' and template != 'customers/addresses' and template != 'customers/login' and template != 'customers/order' and template != 'customers/register' and template != 'customers/reset_password'%}{%assign locksmith_active=true%}{%endif%}{%elsif product%}{%if product[_5][_3].active%}{%assign locksmith_active=true%}{%else%}{%assign collection_saved=collection%}{%for collection in product.collections%}{%if collection[_5][_3].active and collection[_5][_3].active_for_children%}{%if collection.handle == 'wholesale-products'%}{%assign locksmith_active=true%}{%endif%}{%endif%}{%endfor%}{%assign collection=collection_saved%}{%endif%}{%elsif page and page[_5][_3].active%}{%assign locksmith_active=true%}{%elsif collection and collection[_5][_3].active%}{%assign locksmith_active=true%}{%elsif blog and blog[_5][_3].active%}{%assign locksmith_active=true%}{%endif%}{%endif%}{%if locksmith_active%}{%assign locksmith_access_granted=false%}{%assign locksmith_access_granted=true%}{%if locksmith_access_granted%}{%if collection and collection.id == 29909971%}{%assign locksmith_access_granted=false%}{%unless locksmith_access_granted%}{%assign _locksmith_rc_5742=false%}{%if customer%}{%assign _locksmith_rc_5742=true%}{%endif%}{%assign _locksmith_rc_438263=false%}{%if customer%}{%assign _locksmith_rc_438263=true%}{%endif%}{%assign _locksmith_rc_438357=false%}{%if customer.tags contains "wholesale"%}{%assign _locksmith_rc_438357=true%}{%endif%}{%if _locksmith_rc_5742 and _locksmith_rc_438263 and _locksmith_rc_438357%}{%assign locksmith_access_granted=true%}{%endif%}{%endunless%}{%endif%}{%endif%}{%if locksmith_access_granted and product%}{%assign collection_saved=collection%}{%for collection in product.collections%}{%if collection[_5][_3].active and collection[_5][_3].active_for_children%}{%if collection and collection.id == 29909971%}{%assign locksmith_access_granted=false%}{%unless locksmith_access_granted%}{%assign _locksmith_rc_5742=false%}{%if customer%}{%assign _locksmith_rc_5742=true%}{%endif%}{%assign _locksmith_rc_438263=false%}{%if customer%}{%assign _locksmith_rc_438263=true%}{%endif%}{%assign _locksmith_rc_438357=false%}{%if customer.tags contains "wholesale"%}{%assign _locksmith_rc_438357=true%}{%endif%}{%if _locksmith_rc_5742 and _locksmith_rc_438263 and _locksmith_rc_438357%}{%assign locksmith_access_granted=true%}{%endif%}{%endunless%}{%endif%}{%endif%}{%endfor%}{%assign collection=collection_saved%}{%endif%}{%if locksmith_access_granted%}{{content_for_layout}}{%else%}{%if customer%}<p><strong>This content is protected, but it doesn't look like you have access.</strong> If you feel this is a mistake, please contact the store owner.</p>{%else%}{%if shop.customer_accounts_enabled%}<script src="//cdn.shopify.com/shopifycloud/shopify/assets/themes_support/shopify_common-8ea6ac3faf357236a97f5de749df4da6e8436ca107bc3a4ee805cbf08bc47392.js" type="text/javascript" data-via-locksmith="true"></script><script src="//cdn.shopify.com/shopifycloud/shopify/assets/themes_support/customer_area-4beccea87758d91106a581ba89341d9b51842f6da79209258c8297239e950343.js" type="text/javascript" data-via-locksmith="true"></script>{%endif%}<p><strong>This content is protected</strong> - please log in with your customer account to continue.</p>{%if shop.customer_accounts_enabled%}{%layout settings.customer_layout%}<div class="sixteen columns clearfix collection_nav">
+  <h1 class="collection_title">Customer Login</h1>
+</div>
+
+<div class="clearfix" id="customer">  
+  <div class="one-third column">
+    &nbsp;
+  </div>
+  <div class="six columns" id="login_form">{%form 'customer_login'%}{{form.errors|default_errors}}
+
+      <label for="customer_email" class="login">Email Address</label>
+      <input type="email" value="" name="customer[email]" id="customer_email" class="large" size="30" />{%if form.password_needed%}{%comment%}
+          Customer Account Login
+{%endcomment%}<small><em class="right"><a href="#" onclick="showRecoverPasswordForm()">Forgot your password?</a></em></small>
+        <label for="customer_password" class="login">Password</label>
+        <input type="password" value="" name="customer[password]" id="customer_password" class="large password" size="16" />{%endif%}<input class="btn action_button" type="submit" value="Login" style="margin-bottom: 5px !important" />{%unless shop.checkout.guest_login%}<p class="right" style="padding-top: 10px;">
+          New Customer? {{'Sign up &rarr;'|customer_register_link}}
+        </p>{%endunless%}<input type="hidden" id="login_return_url" name="return_url" value="" />{%endform%}{%if shop.checkout.guest_login%}<span class="or"> or </span>{%form 'guest_login'%}<input class="guest_button" type="submit" value="Continue as Guest &rarr;" />
+      <input type="hidden" id="login_return_url" name="return_url" value="" />{%endform%}{%endif%}</div>
+    
+    <div id="recover-password" style='display:none'>
+      <div class="six columns">
+    
+        <h4>Reset Password</h4>{%form 'recover_customer_password'%}{{form.errors|default_errors}}
+
+          <div id="recover_email" class="clearfix large_form">
+            <label for="email" class="large">Email Address</label>
+            <input type="email" value="" size="30" name="email" id="recover-email" class="large" />
+          </div>
+          
+          <p>
+            <em class="note">We will send you an email to reset your password.</em>
+          </p>
+          
+          <p class="action_bottom">
+            <input class="btn action_button" type="submit" value="Submit" />
+            <span class="note">or <a href="#" onclick="hideRecoverPasswordForm()">Cancel</a></span>
+          </p>
+        <input type="hidden" id="login_return_url" name="return_url" value="" />{%endform%}</div>
+    </div>
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+  function showRecoverPasswordForm() {
+    document.getElementById('recover-password').style.display = 'block';
+    document.getElementById('login_form').style.display='none';
+    return false;
+  }
+
+  function hideRecoverPasswordForm() {
+    document.getElementById('recover-password').style.display = 'none';
+    document.getElementById('login_form').style.display = 'block';
+    return false;
+  }
+
+  if (window.location.hash == '#recover') { showRecoverPasswordForm() }
+</script>
+
+        <script type="text/javascript">
+          document.body.className = 'customers-login';
+          
+          window.document.title = 'Account | KINKARACO  ® Green Funeral Products';
+          document.getElementById('login_return_url').value = window.location.pathname;
+        </script>{%endif%}{%endif%}{%endif%}{%else%}{{content_for_layout}}{%endif%}

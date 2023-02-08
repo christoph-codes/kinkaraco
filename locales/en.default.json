@@ -1,0 +1,9 @@
+{
+  "shopify": {
+    "checkout": {
+      "shipping": {
+        "title": "Shipping - (NOTICE: American Residents, please only select USPS if you are in a rural area or have a PO Box only)"
+      }
+    }
+  }
+}
