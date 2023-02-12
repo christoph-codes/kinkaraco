@@ -29,6 +29,7 @@
 
     <!-- Stylesheets -->
     {{ 'styles.css' | asset_url | stylesheet_tag }}
+    {{ 'custom.css' | asset_url | stylesheet_tag }}
     <!--[if lte IE 8]>
       {{ 'ie.css' | asset_url | stylesheet_tag }}
     <![endif]-->
@@ -196,7 +197,7 @@
               <a href="/cart" class="cart {% if cart.item_count > 0 %}active{% endif %}" title="Shopping Cart">Cart{% if cart.item_count > 0 %}<span class="cart_count"> ({{ cart.item_count }})</span>{% endif %}</a>
             </li>
           </ul>
-          <p class="bodynotoppad" style="text-align: right; font-family: 'Cinzel Decorative', cursive; font-size: 12px; margin-top:10px;"><span style="color: #990000;"><strong>If  a death has occurred or is imminent  call </strong><strong style="font-size:18px;">(415) 874-9698</strong></span></p>
+          <p class="bodynotoppad" style="text-align: right; font-family: 'Cinzel Decorative', cursive; font-size: 12px; margin-top:10px;"><span style="color: #990000;"><strong style="font-size:18px;">(415) 874-9698</strong></span></p>
         </div>
 
         {% if settings.featured_content_page != blank %}
