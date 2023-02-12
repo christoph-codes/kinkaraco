@@ -1,0 +1,37 @@
+.flexslider {
+  margin-bottom: 16px;
+}
+@media(min-width:48rem) {
+  .flexslider {
+    height: 360px;
+  }
+}
+.flexslider .slides img {
+    width: 100% !important;
+}
+.action-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.btn {
+  padding: 8px 16px;
+  background-color: #3d290a;
+  border: 2px solid #3d290a;
+  border-radius: 50px;
+  color: white !important;
+  font-weight: bold;
+  margin: 16px 4px 0px;
+  font-family: Garamond, Baskerville, Caslon, serif;
+  text-align: center;
+  transition: 0.15s;
+}
+.btn.secondary {
+  background-color: transparent;
+  border: 2px solid #3d290a;
+  color: #3d290a !important;
+}
+.btn:hover {
+  background-color: #744e12;
+}
